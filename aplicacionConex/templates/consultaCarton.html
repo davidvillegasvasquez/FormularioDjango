@@ -1,0 +1,18 @@
+<!-- {% extends "base_generica.html" %} -->
+
+{% block content %}
+  <h1>monto del cartón</h1>
+  
+  <p></p>
+  <form action="" method="GET">
+    <!-- {% csrf_token %} -->
+    <table>
+    	{{ widget_formulario.as_table }}
+	<!-- si no le antepongo widget_ al identificador, no se hará efectivo. -->
+        
+    </table>
+    <input type="submit" value="Buscar">
+  </form>
+  <p>Monto: {{ montoPlantilla }} </p>
+{% endblock %}
+
