@@ -1,5 +1,11 @@
-# Text backup files
+# Text backup files:
 *.bak
 
-# Database
+# Database:
 *.sqlite3
+
+#Datos de acceso a la base de datos:
+controltickets.ini
+
+# Modulo config.py:
+config.py
