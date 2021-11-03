@@ -1,7 +1,7 @@
 # Text backup files:
 *.bak
 
-#Datos de acceso a la base de datos:
+# Datos de acceso a la base de datos:
 dbInfo.ini
 
-#
+# Otro tipo de archivo:
