@@ -9,3 +9,6 @@ controltickets.ini
 
 # Modulo config.py:
 config.py
+
+#Datos de acceso a la base de datos:
+dbInfo.ini

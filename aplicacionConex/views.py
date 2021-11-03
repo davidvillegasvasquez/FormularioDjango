@@ -1,8 +1,8 @@
 from django.shortcuts import render
 import psycopg2
-from aplicacionConex.forms import FormNroCarton
+from aplicacionConex.forms import FormNroCarton #Note como se importan los módulos dentro de una aplicación django.
 from django.http import HttpResponseRedirect, HttpResponse
-from config import config
+from aplicacionConex.config import config #Note como se importan los módulos dentro de una aplicación django.
 # Create your views here.
 
 def index(request):
