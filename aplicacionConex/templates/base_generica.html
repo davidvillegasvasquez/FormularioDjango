@@ -5,9 +5,9 @@
   {% block title %}<title>CONEXIÓN CON BASE DE DATOS EXTERNA</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!--
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
   <!-- Add additional CSS in static file: -->
   {% load static %}
@@ -18,22 +18,28 @@
 
   <div class="container-fluid">
 
-    <div class="row">
       <div class="col-sm-2">
-      {% block sidebar %}
+       <!--{% block sidebar %}-->
       <!--SubBloque sidebar de lista desordenada común para todos los tipos de usuarios:-->
-      <ul class="sidebar-nav">
+        <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
           <li><a href="">Monto de ticket cartón específico</a></li>
           <li><a href="">Otro link a cullá</a></li>
-      </ul>
-      {% endblock %}
+        </ul>
+        <form action="" method="GET">
+           <!-- {% csrf_token %} -->
+           <table>
+    	      {{ widget_formulario.as_table }}
+	   <!-- si no le antepongo widget_ al identificador, no se hará efectivo. -->    
+           </table>
+           <input type="submit" value="Buscar">
+       </form>
+      <p>Monto: {{ montoPlantilla }} </p>
+      </div>
+       <!--{% endblock %}-->
       <div class="col-sm-10 ">
-      {% block content %}{% endblock %}
-
+      	{% block content %}{% endblock %}
       </div>
-      </div>
-    </div>
 
   </div>
 </body>

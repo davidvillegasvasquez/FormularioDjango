@@ -8,18 +8,41 @@ from aplicacionConex.config import config #Note como se importan los módulos de
 def index(request):
     paramConex = config()
     try:
-        conn = psycopg2.connect(**paramConex)
+        conn = psycopg2.connect(**paramConex) #Como está en index, se abrirá apenas se acceda a la página, y se cerrará la conexión inmediatamente.
+        conn2 = psycopg2.connect(**paramConex)#Aquí hay un error de diseño: tendrá la conexión abierta desde el inicio. Se debe abrir al darle al botón buscar.
 
     except (Exception, psycopg2.DatabaseError) as error:
         idDelCliente1="sin servicio, intente de nuevo o más tarde"
-
+        
     else:
         cursor = conn.cursor()
+        cursor2 = conn2.cursor()
         cursor.execute("select id_cliente from consignación where no_consignación = 2")
         idDelCliente1 = cursor.fetchone()[0]
         conn.close()
+        formulario = FormNroCarton(request.GET)
+        idTicket = formulario['campoIdTicket'].value()
+
+        if idTicket is not None: #Primero evaluamos que haya algo en el control.
+            cursor2.execute("select monto from ticket_cartón_recibidos where id_cartón = %s limit 1",(idTicket,))
+            
+            monto = cursor2.fetchone()
+            conn2.close()
+            if monto is not None:
+                monto = monto[0]
+            else: 
+                monto = ""
+
+        else:
+            monto = ""
+
+        #conn2.close()
+        #conn.close()
+
         
-    return render(request, "index.html", context={"IdClienteConsig1" : idDelCliente1})
+    context = {'widget_formulario' : formulario, 'montoPlantilla': monto, "IdClienteConsig1" : idDelCliente1}
+    return render(request, "index.html", context)
+
 
 def ConsulTicketCarton(request):  
     
