@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-  {% block title %}<title>CONEXIÓN CON BASE DE DATOS EXTERNA</title>{% endblock %}
-  <meta charset="utf-8">
+  
+  <title>CONEXIÓN CON BASE DE DATOS EXTERNA</title>
+  <!--<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!--
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!--
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
   <!-- Add additional CSS in static file: -->
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+   {% load static %}     <!-- -->
+  <link rel="stylesheet" href="{% static 'css/apariencia.css' %}">
 </head>
-
+<STYLE>A {text-decoration: none;} </STYLE> <!-- Para quitar todos los subrayados a las anclas.-->
 <body>
-
-  <div class="container-fluid">
-
-      <div class="col-sm-2">
-       <!--{% block sidebar %}-->
-      <!--SubBloque sidebar de lista desordenada común para todos los tipos de usuarios:-->
-        <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="">Monto de ticket cartón específico</a></li>
-          <li><a href="">Otro link a cullá</a></li>
-        </ul>
-        <form action="" method="GET">
-           <!-- {% csrf_token %} -->
-           <table>
-    	      {{ widget_formulario.as_table }}
-	   <!-- si no le antepongo widget_ al identificador, no se hará efectivo. -->    
-           </table>
-           <input type="submit" value="Buscar">
-       </form>
-      <p>Monto: {{ montoPlantilla }} </p>
-      </div>
-       <!--{% endblock %}-->
-      <div class="col-sm-10 ">
-      	{% block content %}{% endblock %}
-      </div>
-
+ <div class="cuerpo">
+  <div class="cabecera">
+   <h3>Cabecera</h3>
   </div>
+  <div class="subcabecera">
+   <a href="">Menú1</a>&nbsp&nbsp&nbsp&nbsp<a href="">Menú2</a>&nbsp&nbsp&nbsp&nbsp <a href="">Menú3</a>&nbsp;<!--Agregamos espacios &nbsp entre los menus (el ; es prescindible).  -->
+  </div>
+   <div class="sidebar-nav">
+      
+        <a href="{% url 'index' %}">Home</a><br>
+        <a href="">Un enlace x</a><br>
+        <a href="">Otro link a cullá</a><br>
+        <br><!--Metemos dos saltos efecto retorno de carro (break) -->
+        <br>
+     <div class="formulario">
+         <form action="" method="GET">
+           <!-- {% csrf_token %} -->
+         <table>
+    	   {{ widget_formulario.as_table }}
+	   <!-- si no le antepongo widget_ al identificador, no se hará efectivo. -->    
+         </table>
+        <input type="submit" value="Buscar">
+        </form>
+        <p>Monto: {{ montoPlantilla }} </p>
+      </div> <!--cierre class formulario-->
+
+  </div> <!--cierre class sidebar-nav-->
+
+  <div class="col-sm-10 ">
+      	{% block content %}{% endblock %}
+  </div>
+ </div><!--cierre class cuerpo-->
+ <div class="pie">
+   <h3>Pie de Página</h3>
+ </div>
 </body>
 </html>
