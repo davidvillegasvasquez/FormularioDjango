@@ -1,0 +1,71 @@
+/* Los tipos de letra no estándar hay que importarlos */
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 20px;
+    font-family: Montserrat;
+    float: left;
+    width: 25%;
+    text-align: left;
+}
+
+.col-sm-10 {
+    
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    float: center;
+    font-family: Open Sans;
+    width: 60%;
+    margin-left: 30px;
+    font-size:small;
+}
+
+.sidebar-nav.formulario {
+    font-size:small;
+    padding: 10px;
+    /*
+    margin-top: 20px;
+    padding: 20px;
+    text-align: right;
+    float: right;
+    font-family: Open Sans;*/
+}
+
+.cuerpo {
+    max-width: 1100px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cabecera {
+    clear: both;
+    color: white;
+    background-color: #2C3E50;
+    min-height: 1px;
+    padding: 1px;
+    text-align: center; 
+    border-width: 1
+}
+
+.subcabecera {
+    clear: both;
+    color: black;
+    background-color: yellow;
+    /*min-height: 0px;*/
+    padding: 0px;
+    border-width: 1
+    text-align: center; 
+}
+
+.pie {
+    clear: both;
+    color: white;
+    background-color: #2C3E50;
+    min-height: 10px;
+    padding: 10px;
+    text-align: center;
+}
