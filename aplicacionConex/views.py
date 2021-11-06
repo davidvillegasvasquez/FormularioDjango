@@ -7,12 +7,13 @@ from aplicacionConex.config import config #Note como se importan los módulos de
 
 def index(request):
 
-    paramConex = config()
+    #paramConex = config()
     formulario = FormNroCarton(request.GET)
-    idTicket = formulario['campoIdTicket'].value()
+    idTicket = formulario['campoIdTicket'].value() #Y así obtemos el valor actual del atributo campoIdTicket de la clase FormNroCarton, que es el que se encuentre actualmente en el widget formulario.
     
     if idTicket is not None: #Primero evaluamos que haya algo en el control.
         try:
+            paramConex = config() #Estudiar dónde es mejor que vaya esta proposición.
             conn2 = psycopg2.connect(**paramConex) 
         except (Exception, psycopg2.DatabaseError) as error:
             idDelCliente1="Sin conexión en este momento, intente de nuevo o más tarde"

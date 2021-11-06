@@ -39,7 +39,7 @@
          </table>
         <input type="submit" value="Buscar">
         </form>
-        <p>Monto: {{ montoPlantilla }} </p>
+        <p>Monto: {{ montoPlantilla }} {% ifnotequal montoPlantilla "" %}Bs{% endifnotequal %}</p><!--Note los condicionales para plantillas django.-->
       </div> <!--cierre class formulario-->
 
   </div> <!--cierre class sidebar-nav-->

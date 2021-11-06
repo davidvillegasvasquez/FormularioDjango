@@ -23,16 +23,17 @@
     font-size:small;
 }
 
-.sidebar-nav.formulario {
+/*.formulario {
     font-size:small;
     padding: 10px;
-    /*
+    text-align: left;
+    
     margin-top: 20px;
     padding: 20px;
     text-align: right;
     float: right;
-    font-family: Open Sans;*/
-}
+    font-family: Open Sans;
+}*/
 
 .cuerpo {
     max-width: 1100px;
