@@ -5,6 +5,14 @@
 
 <h2>Enlace a campo externo</h2>
 
-  <p>Texto para este bloque de contenido, etc.</p>
-
+  <p>Texto para este bloque de contenido, etc.  Cant visitas: {{cantVisitas}}</p>
+  <p>
+     {% ifnotequal cantVisitas 0 %}
+         {% ifnotequal montoPlantilla "" %} 
+            Vemos que el ticket existe.
+         {% else %}
+            El ticket no existe.
+         {% endifnotequal %}      
+     {% endifnotequal %}</p>
+     
 {% endblock %}

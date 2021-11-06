@@ -10,6 +10,8 @@ def index(request):
     #paramConex = config()
     formulario = FormNroCarton(request.GET)
     idTicket = formulario['campoIdTicket'].value() #Y así obtemos el valor actual del atributo campoIdTicket de la clase FormNroCarton, que es el que se encuentre actualmente en el widget formulario.
+    acum_visitas = request.session.get('num_visits', 0) #Contador de visitas. Sirve para configurar la presentación de la página cuando se accede por primera vez. Considere que num_visits es el nombre arbitrario
+    request.session['num_visits'] = acum_visitas + 1 # Recordar que cuando se aplica un contador de visitas, se requiere tener habilitada una base de datos en el proyecto, para guardar los datos de las sesiones que se almacenan en las cookies. De modo que se debe hacer un "python manage.py migrate" para que se haga efectiva esta implementación. Investigar si hay alguna manera de lograr el mismo efecto sin la necesidad de habilitar una base de datos en el proyect, sólo usando la externa.
     
     if idTicket is not None: #Primero evaluamos que haya algo en el control.
         try:
@@ -31,6 +33,6 @@ def index(request):
     else:
         monto = "" #Esto evita que aparezca None, o el error de "UnboundLocalError: local variable 'monto' referenced before assignment" cuando se abre la página por primera vez.
             
-    context = {'widget_formulario' : formulario, 'montoPlantilla': monto,}
+    context = {'widget_formulario' : formulario, 'montoPlantilla': monto, 'cantVisitas': acum_visitas,}
     
     return render(request, "index.html", context)

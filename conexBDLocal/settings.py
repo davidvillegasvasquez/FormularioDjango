@@ -68,21 +68,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'conexBDLocal.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-"""
-import psycopg2.extensions
-
+#Use esta base de datos sólo para contar el número de sesiones (encontrar la forma de como hacer esto sin la necesidad de esta base de datos):
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': 'controltickets', 'USER': 'david', 'PASSWORD': '1234', 'HOST': '127.0.0.1', 'PORT': '5432', 
-    },
-    'OPTIONS': {
-        'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
