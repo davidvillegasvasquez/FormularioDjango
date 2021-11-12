@@ -1,0 +1,45 @@
+
+{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+
+{% block content %}
+
+<h3>Ejemplo de grilla anidada</h3>
+<!-- Aquí vemos como se pueden anidar las grillas de bootstraps. Haremos una matriz e 4 filas y dos columnas (4x2). -->
+<div class="row"> 
+  <div class="col-6">
+      <p>Columna1Fila1-6</p>	
+  </div>
+  <div class="col-6">
+     <p>Columna2Fila1-6</p> 
+  </div>
+</div>  <!--Cierre del row (primera fila).-->  
+
+<div class="row"> 
+  <div class="col-3">
+      <p>Columna1Fila2 peso 3</p>	
+  </div>
+  <div class="col-3">
+     <p>Columna2Fila2 peso 3</p> 
+  </div>
+</div>  <!--Cierre del row 2 (segunda fila).--> 
+
+<div class="row"> 
+  <div class="col">
+      <p>Columna1Fila3 sin peso</p>	
+  </div>
+  <div class="col">
+      <p>Columna2Fila3 sin peso</p> 
+  </div>
+</div>  <!--Cierre del row 3 (tercera fila)-->
+
+<div class="row"> 
+  <div class="col-3">
+      <p>Columna1Fila4 peso 3</p>	
+  </div>
+  <div class="col-9">
+      <p>Columna2Fila4 peso 9 Note que nos pasamos de 12 en la suma de las dos columanas.</p> 
+  </div>
+</div>  <!--Cierre del row 4 (cuarta fila)-->
+
+     
+{% endblock %}

@@ -5,25 +5,22 @@
   <title>CONEXIÓN CON BASE DE DATOS EXTERNA</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-  <!-- Add additional CSS in static file: -->
-   {% load static %}     <!-- -->
-  <!--<link rel="stylesheet" href="{% static 'css/apariencia.css' %}">-->
 </head>
 <STYLE>A {text-decoration: none;} </STYLE> <!-- Para quitar todos los subrayados a las anclas.-->
 <body>
- <div class="container">
+ <div class="container"><!--Todos los elementos de esta pag estarán en todas las paginas del sitio web, excepto la que están en la columna principal debajo de la subcapecera, en "block content-endblock" que están encerrados entre llaves y signos %. Tengo que describirlo así, porque si lo cito literamente, no respeta ni que esté dentro de este comentario y me produce el error: 'block' tag with name 'content' appears more than once-->
   <div class="row" style="background-color:#2C3E50; color: white"><!-- Fila para la cabecera. Note como colocar los colores de fondo y texto.-->
    <h3>Cabecera</h3>
   </div>
   
   <div class="row" style="background-color:yellow"><!-- Fila para la subcabecera-->
-   <p><a href="{% url 'selectwidget' %}">select widget</a>&nbsp&nbsp&nbsp&nbsp<a href="">Menú2</a>&nbsp&nbsp&nbsp&nbsp <a href="">Menú3</a></p><!--Agregamos espacios &nbsp entre los menus (el ; es prescindible).  -->
+   <p><a href="{% url 'selectdatewidget' %}">SelectDateWidget</a>&nbsp&nbsp&nbsp&nbsp<a href="{% url 'grillanidada' %}">Grilla anidada</a>&nbsp&nbsp&nbsp&nbsp <a href="">Menú3</a></p><!--Agregamos espacios &nbsp entre los menus (el ; es prescindible).  -->
   </div><!-- Cierre fila subcabecera-->
   
   <div class="row"><!-- Fila para contenido-->
-   <div class="col-sm-3"><!-- Fila para columna lateral izq-->  
+   <div class="col-sm-3"><!-- Fila para columna lateral izq que estará en todos las páginas del sitio web.-->  
         <a href="{% url 'index' %}">Home</a><br>
         <a href="">Un enlace x</a><br>
         <a href="">Otro link a cullá</a><br>
@@ -39,6 +36,7 @@
         </form>
         
         <p style="font-size:large">Monto: {{ montoPlantilla }} {% ifnotequal montoPlantilla "" %}Bs{% endifnotequal %}</p><!--Note los condicionales para plantillas django.-->
+        <p>Visitas: {{ cantVisitas }} </p>
       </div> <!--cierre de col-sm-3-->
   
     <div class="col-sm-7 "><!--Columna principal central-->

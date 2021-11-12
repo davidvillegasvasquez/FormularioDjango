@@ -1,0 +1,17 @@
+
+{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+
+{% block content %}
+
+<h3>Ejemplo de Select Date Widget</h3>
+<!-- Aquí vemos como se pueden anidar las grillas de bootstraps. Haremos una matriz e 4 filas y dos columnas (4x2). -->
+<div class="row"> 
+  <div class="col-6">
+      <p>{{ formuSimpEnPlantilla }}</p>	
+  </div>
+  <div class="col-6">
+     <p>Columna2Fila1-6</p> 
+  </div>
+</div>  <!--Cierre del row (primera fila).--> 
+     
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import psycopg2
-from aplicacionConex.forms import FormNroCarton #Note como se importan los módulos dentro de una aplicación django.
+from aplicacionConex.forms import FormNroCarton, SimpleForm #Note como se importan los módulos dentro de una aplicación django.
 from django.http import HttpResponseRedirect, HttpResponse
 from aplicacionConex.config import config #Note como se importan los módulos dentro de una aplicación django.
 # Create your views here.
@@ -12,20 +12,23 @@ def index(request):
     return render(request, "index.html", context)
     
   
-def EjemSelectWidget(request):
+def EjemSelectDateWidget(request):
       
     context = Formulario(request)
+    formularioSimpleForm = SimpleForm(request.GET)
     
-    return render(request, "plantillaSelectWidget.html", context)  
+    contexSelectDateWidget = {'formuSimpEnPlantilla' : formularioSimpleForm, 'montoPlantilla':context['montoPlantilla'], 'formularioEnPlantilla':context,}
+    
+    return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget)  
     
     
-def Formulario(request):
-    """Vista de uso comun para las otras vistas del sitio, porque en todos los documentos del sitio se verá el formulario."""
+def Formulario(requestParam):
+    """Recordar que esta función no es una vista, pues no renderiza para plantilla alguna, sin empargo todas las vistas la invocan puesto que todos los documentos del sitio se verá el formulario."""
     #paramConex = config()
-    formulario = FormNroCarton(request.GET)
+    formulario = FormNroCarton(requestParam.GET)
     idTicket = formulario['campoIdTicket'].value() #Y así obtemos el valor actual del atributo campoIdTicket de la clase FormNroCarton, que es el que se encuentre actualmente en el widget formulario.
-    acum_visitas = request.session.get('num_visits', 0) #Contador de visitas. Sirve para configurar la presentación de la página cuando se accede por primera vez. Considere que num_visits es el nombre arbitrario
-    request.session['num_visits'] = acum_visitas + 1 # Recordar que cuando se aplica un contador de visitas, se requiere tener habilitada una base de datos en el proyecto, para guardar los datos de las sesiones que se almacenan en las cookies. De modo que se debe hacer un "python manage.py migrate" para que se haga efectiva esta implementación. Investigar si hay alguna manera de lograr el mismo efecto sin la necesidad de habilitar una base de datos en el proyect, sólo usando la externa.
+    acum_visitas = requestParam.session.get('num_visits', 0) #Contador de visitas. Sirve para configurar la presentación de la página cuando se accede por primera vez. Considere que num_visits es el nombre arbitrario. Requiere base de datos interna.
+    requestParam.session['num_visits'] = acum_visitas + 1 # Recordar que cuando se aplica un contador de visitas, se requiere tener habilitada una base de datos en el proyecto, para guardar los datos de las sesiones que se almacenan en las cookies. De modo que se debe hacer un "python manage.py migrate" para que se haga efectiva esta implementación. Investigar si hay alguna manera de lograr el mismo efecto sin la necesidad de habilitar una base de datos en el proyecto, sólo usando la externa dónde se almacenaran dicha cantidad.
     
     if idTicket is not None: #Primero evaluamos que haya algo en el control.
         try:
@@ -39,14 +42,22 @@ def Formulario(request):
             monto = cursor2.fetchone() #Recordar que los fetch siempre se deben hacer antes de cerrar conexión.
             
             if monto is not None:
-                monto = monto[0]
-                conn2.close()
+                monto = monto[0] 
             else: 
                 monto = ""
-                conn2.close()
+                
+            conn2.close() #Cerramos conexión independientemente del resultado, pues teníamos esta conexión abierta.
+                
     else:
         monto = "" #Esto evita que aparezca None, o el error de "UnboundLocalError: local variable 'monto' referenced before assignment" cuando se abre la página por primera vez.
             
     context = {'formularioEnPlantilla' : formulario, 'montoPlantilla': monto, 'cantVisitas': acum_visitas,}
     
     return context
+    
+    
+def EjemGrillaAnidada(request):
+      
+    context = Formulario(request)
+    
+    return render(request, "grillaAnidada.html", context)
