@@ -5,14 +5,20 @@
 
 <h2>Enlace a campo externo</h2>
 
-  <p>Texto para este bloque de contenido, etc.  Cant visitas: {{cantVisitas}}</p>
-  <p>
-     {% ifnotequal cantVisitas 0 %}
+ <div class="row"> 
+  <div class="col">
+      {% ifnotequal cantVisitas 0 %}
          {% ifnotequal montoPlantilla "" %} 
             Vemos que el ticket existe.
          {% else %}
             El ticket no existe.
          {% endifnotequal %}      
-     {% endifnotequal %}</p>
+     {% endifnotequal %}</p>	
+  </div>
+  <hr>
+  <div class="col">
+     <p>Texto para este bloque de contenido, etc.  Cant visitas: {{cantVisitas}}</p> 
+  </div>
+</div>  <!--Cierre del row -->   
      
 {% endblock %}

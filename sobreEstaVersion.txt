@@ -1,0 +1,1 @@
+En esta versión vemos como usar una función para uso común de las vistas del sitio web. Esta función consiste en retornar el formulario con su monto de ticket según su id. Note que no es una vista, pues no renderiza para una plantilla asociada.
