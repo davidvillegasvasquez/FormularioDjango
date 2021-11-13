@@ -9,18 +9,23 @@ class FormNroCarton(forms.Form):
     def clean_campoIdTicket(self):
         #self.cleaned_data['campoIdTicket'] 
         return self.cleaned_data['campoIdTicket']
-        
-BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
 
-FAVORITE_COLORS_CHOICES = [
+
+class SimpleForm(forms.Form):
+    #Declaramos atributos constantes de esta clase (estas puden dejar de ser atributos particulares de una clase, y ser a nivel de módulo para uso común de todas las clases (espacio de nombres a nivel de módulo):      
+    BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
+
+    FAVORITE_COLORS_CHOICES = [
     ('blue', 'Blue'),
     ('green', 'Green'),
     ('black', 'Black'),
 ]
-
-class SimpleForm(forms.Form):
     birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), required=False)
     favorite_colors = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-        choices=FAVORITE_COLORS_CHOICES, required=False)     
+        choices=FAVORITE_COLORS_CHOICES, required=False)  
+        
+class FormSeleccionBase(forms.Form):
+    CHOICES = [('1', 'First'), ('2', 'Second')]
+    seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False)   
 
     

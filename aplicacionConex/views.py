@@ -1,9 +1,12 @@
 from django.shortcuts import render
 import psycopg2
-from aplicacionConex.forms import FormNroCarton, SimpleForm #Note como se importan los módulos dentro de una aplicación django.
+from aplicacionConex.forms import FormNroCarton, SimpleForm #Note como se importan los formularios definidos por el usuario de una aplicación django, en este caso específico, el módulo forms.py, más específicamente las clases definidas por el usuario, FormNroCarton y SimpleForm contenidas en dicho modulo forms.
 from django.http import HttpResponseRedirect, HttpResponse
 from aplicacionConex.config import config #Note como se importan los módulos dentro de una aplicación django.
+from django import forms #Este es el módulo de formularios incorporados que vienen con django.
+
 # Create your views here.
+
 
 def index(request):
     
@@ -19,14 +22,14 @@ def EjemSelectDateWidget(request):
     
     contexSelectDateWidget = {'formuSimpEnPlantilla' : formularioSimpleForm,}
     
-    #contexSelectDateWidget.update(context) #concatenamos el diccionario apuntado por el identificador context a la función Formulario, que retorna dicho formulario. Así podremos mandar todas las variables de contexto de ambos formularios a la plantilla en común.
+    #contexSelectDateWidget.update(context) #con el atributo-metodo update() para los diccionarios, concatenamos el diccionario apuntado por el identificador context a la función Formulario, que retorna dicho formulario. Así podremos mandar todas las variables de contexto de ambos formularios a la plantilla común, en este caso plantillaSelectDateWidget.html.
     """
     
-    #Podemos racionalizar el código para hacerlo más corto:
+    #Racionalizamos el código para hacerlo más corto:
     contexSelectDateWidget = {'formuSimpEnPlantilla' : SimpleForm(request.GET),}
     contexSelectDateWidget.update(Formulario(request))
     
-    return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget)  
+    return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget) 
     
     
 def Formulario(requestParam):
@@ -69,10 +72,12 @@ def EjemGrillaAnidada(request):
     
     return render(request, "grillaAnidada.html", context)
     
-    
+from aplicacionConex.forms import FormSeleccionBase  
+
 def SelectWidgetHerencia(request):
     
-    context = Formulario(request) 
-     
-    return render(request, "plantillaSelectWidgetHeredado.html", context)
+    contexto = {'formularioEnPlantilla' : FormSeleccionBase(request.GET),}
+    #contexto.update(Formulario(request)) #Si agrego el formulario cosuta de ticket, no me aparece el selec con radiobutton. Averiguar esto. 
+    
+    return render(request, "plantillaSelectWidgetHeredado.html", contexto)
     
