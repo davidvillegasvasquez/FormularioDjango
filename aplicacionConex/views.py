@@ -13,11 +13,18 @@ def index(request):
     
   
 def EjemSelectDateWidget(request):
-      
+    """  
     context = Formulario(request)
     formularioSimpleForm = SimpleForm(request.GET)
     
-    contexSelectDateWidget = {'formuSimpEnPlantilla' : formularioSimpleForm, 'montoPlantilla':context['montoPlantilla'], 'formularioEnPlantilla':context,}
+    contexSelectDateWidget = {'formuSimpEnPlantilla' : formularioSimpleForm,}
+    
+    #contexSelectDateWidget.update(context) #concatenamos el diccionario apuntado por el identificador context a la función Formulario, que retorna dicho formulario. Así podremos mandar todas las variables de contexto de ambos formularios a la plantilla en común.
+    """
+    
+    #Podemos racionalizar el código para hacerlo más corto:
+    contexSelectDateWidget = {'formuSimpEnPlantilla' : SimpleForm(request.GET),}
+    contexSelectDateWidget.update(Formulario(request))
     
     return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget)  
     
@@ -61,3 +68,11 @@ def EjemGrillaAnidada(request):
     context = Formulario(request)
     
     return render(request, "grillaAnidada.html", context)
+    
+    
+def SelectWidgetHerencia(request):
+    
+    context = Formulario(request) 
+     
+    return render(request, "plantillaSelectWidgetHeredado.html", context)
+    
