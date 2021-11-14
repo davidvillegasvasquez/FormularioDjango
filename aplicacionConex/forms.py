@@ -26,6 +26,11 @@ class SimpleForm(forms.Form):
         
 class FormSeleccionBase(forms.Form):
     CHOICES = [('1', 'First'), ('2', 'Second')]
-    seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False)   
+    seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False) 
+    
+class FormAplicEstilos(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'special'}), required=False)
+    url = forms.URLField(required=False)
+    comment = forms.CharField(widget=forms.TextInput(attrs={'size': '40'}), required=False)  
 
     

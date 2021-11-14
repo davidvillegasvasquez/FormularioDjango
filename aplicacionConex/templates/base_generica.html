@@ -16,7 +16,7 @@
   </div>
   
   <div class="row" style="background-color:yellow"><!-- Fila para la subcabecera-->
-   <p><a href="{% url 'selectdatewidget' %}">SelectDateWidget</a>&nbsp&nbsp&nbsp&nbsp<a href="{% url 'grillanidada' %}">Grilla anidada</a>&nbsp&nbsp&nbsp&nbsp <a href="{% url 'selecwidgetheritage' %}">Heredados SelectWidget</a></p><!--Agregamos espacios &nbsp entre los menus (el ; es prescindible).  -->
+   <p><a href="{% url 'selectdatewidget' %}">SelectDateWidget</a>&nbsp&nbsp&nbsp&nbsp<a href="{% url 'grillanidada' %}">Grilla anidada</a>&nbsp&nbsp&nbsp&nbsp <a href="{% url 'selecwidgetheritage' %}">Heredados SelectWidget</a>&nbsp&nbsp&nbsp&nbsp <a href="{% url 'estilos' %}">Aplicando estilos</p><!--Agregamos espacios &nbsp entre los menus (el ; es prescindible).  -->
   </div><!-- Cierre fila subcabecera-->
   
   <div class="row"><!-- Fila para contenido-->
@@ -29,7 +29,7 @@
         <form action="" method="GET" style="font-size: x-small; align-items: center">
            <!-- {% csrf_token %} Con esta encriptación hago invisible datos sensibles. Aquí no hace falta.-->
          <!--<table>-->
-    	   {{ formularioEnPlantilla }}
+    	   {{ formularioEnPlantillaBase }}
         <!-- </table>-->
         <br><br>
         <input type="submit" value="Buscar"><!-- El input no puede estar fuera del ámbito <form></form>-->

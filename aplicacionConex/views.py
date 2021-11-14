@@ -3,7 +3,7 @@ import psycopg2
 from aplicacionConex.forms import FormNroCarton, SimpleForm #Note como se importan los formularios definidos por el usuario de una aplicación django, en este caso específico, el módulo forms.py, más específicamente las clases definidas por el usuario, FormNroCarton y SimpleForm contenidas en dicho modulo forms.
 from django.http import HttpResponseRedirect, HttpResponse
 from aplicacionConex.config import config #Note como se importan los módulos dentro de una aplicación django.
-from django import forms #Este es el módulo de formularios incorporados que vienen con django.
+
 
 # Create your views here.
 
@@ -26,7 +26,7 @@ def EjemSelectDateWidget(request):
     """
     
     #Racionalizamos el código para hacerlo más corto:
-    contexSelectDateWidget = {'formuSimpEnPlantilla' : SimpleForm(request.GET),}
+    contexSelectDateWidget = {'formularioEnPlantilla' : SimpleForm(request.GET),}
     contexSelectDateWidget.update(Formulario(request))
     
     return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget) 
@@ -61,7 +61,7 @@ def Formulario(requestParam):
     else:
         monto = "" #Esto evita que aparezca None, o el error de "UnboundLocalError: local variable 'monto' referenced before assignment" cuando se abre la página por primera vez.
             
-    context = {'formularioEnPlantilla' : formulario, 'montoPlantilla': monto, 'cantVisitas': acum_visitas,}
+    context = {'formularioEnPlantillaBase' : formulario, 'montoPlantilla': monto, 'cantVisitas': acum_visitas,}
     
     return context
     
@@ -76,8 +76,18 @@ from aplicacionConex.forms import FormSeleccionBase
 
 def SelectWidgetHerencia(request):
     
-    contexto = {'formularioEnPlantilla' : FormSeleccionBase(request.GET),}
-    #contexto.update(Formulario(request)) #Si agrego el formulario cosuta de ticket, no me aparece el selec con radiobutton. Averiguar esto. 
+    contexto = {'formularioEnPlantilla' : FormSeleccionBase(request.GET),} 
+    contexto.update(Formulario(request)) #Si agrego el formulario cosuta de ticket, no me aparece el selec con radiobutton. Averiguar esto. Resp: era porque el nombre concordaba con el de la plantilla base (formularioEnPlantilla). Procedí a cambiar el nombre de formulario en plantilla base por formularioEnPlantillaBase, para que no se confundieran las dos variables de contexto en la misma plantilla html dónde actuan.
     
     return render(request, "plantillaSelectWidgetHeredado.html", contexto)
+    
+    
+from aplicacionConex.forms import FormAplicEstilos
+
+def AplicEstilos(request):
+    
+    contexto = {'formularioEnPlantilla' : FormAplicEstilos(request.GET),}
+    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket (tampoco visitas).
+    
+    return render(request, "plantillaAplicandoEstilos.html", contexto)
     
