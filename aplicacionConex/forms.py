@@ -25,7 +25,7 @@ class SimpleForm(forms.Form):
         choices=FAVORITE_COLORS_CHOICES, required=False)  
         
 class FormSeleccionBase(forms.Form):
-    CHOICES = [('1', 'First'), ('2', 'Second')]
+    CHOICES = [('1', 'First'), ('10000', 'Second')]
     seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False) 
     
 class FormAplicEstilos(forms.Form):

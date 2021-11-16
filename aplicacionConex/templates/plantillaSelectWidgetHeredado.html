@@ -7,10 +7,17 @@
 <!-- Aquí vemos como se pueden anidar las grillas de bootstraps. Haremos una matriz e 4 filas y dos columnas (4x2). -->
 <div class="row"> 
   <div class="col-6">
-      <p>Tipo RadioButton: {{ formularioEnPlantilla }}</p>	
-  </div>
+   <form action="" method="GET" style="font-size: x-small; align-items: center">
+           <!-- {% csrf_token %} Con esta encriptación hago invisible datos sensibles. Aquí no hace falta.-->
+         <!--<table>-->
+    	   {{ formularioEnPlantilla }}
+        <!-- </table>-->
+        <br><br>
+        <input type="submit" value="selección">
+      </form>
+  </div><!--Cierre primer columna.--> 
   <div class="col-6">
-     <p>Columna2Fila1-6</p> 
+     <p>Selección hecha: {{ valSelecEnPlanti }}</p> 
   </div>
 </div>  <!--Cierre del row (primera fila).--> 
      
