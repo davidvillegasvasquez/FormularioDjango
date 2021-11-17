@@ -21,6 +21,7 @@ class SimpleForm(forms.Form):
     ('black', 'Black'),
 ]
     birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), required=False)
+    
     favorite_colors = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
         choices=FAVORITE_COLORS_CHOICES, required=False)  
         

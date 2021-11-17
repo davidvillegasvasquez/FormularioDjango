@@ -10,7 +10,7 @@
    <form action="" method="GET" style="font-size: x-small; align-items: center">
            <!-- {% csrf_token %} Con esta encriptación hago invisible datos sensibles. Aquí no hace falta.-->
          <!--<table>-->
-    	   {{ formularioEnPlantilla }}
+    	   {{ formularioEnPlantilla.as_table }}
         <!-- </table>-->
         <br><br>
         <input type="submit" value="selección">

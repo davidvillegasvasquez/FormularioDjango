@@ -28,10 +28,24 @@ def EjemSelectDateWidget(request):
     contexSelectDateWidget = {'formuSimpEnPlantilla' : formularioSimpleForm,}
     
     #contexSelectDateWidget.update(context) #con el atributo-metodo update() para los diccionarios, concatenamos el diccionario apuntado por el identificador context a la función Formulario, que retorna dicho formulario. Así podremos mandar todas las variables de contexto de ambos formularios a la plantilla común, en este caso plantillaSelectDateWidget.html.
-    """
+    
     
     #Racionalizamos el código para hacerlo más corto:
     contexSelectDateWidget = {'formularioEnPlantilla' : SimpleForm(request.GET),}
+    """
+    
+    #Pero como necesitamos acceder a los valores de los campos atributos del objeto de clase SimpleForm, tenemos que usar necesariamente sun identificador:
+    
+    formularioSimpleForm = SimpleForm(request.GET)
+    
+    #Extraemos los valores de sus atributos recogidos en las solicitudes:
+    atrib_birth_year = formularioSimpleForm['birth_year'].value()
+    atrib_favorite_colors = formularioSimpleForm['favorite_colors'].value()
+    
+    #Preparamos el primer diccionario con las variables de contexto para la plantilla:
+    contexSelectDateWidget = {'formularioEnPlantilla' : formularioSimpleForm, 'atrib_birth_year_EnPlantilla' : atrib_birth_year, 'atrib_favorite_colors_EnPlantilla' : atrib_favorite_colors,}
+    
+    #Concatenamos con el de formulario de consulta de tickets:
     contexSelectDateWidget.update(Formulario(request))
     
     return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget) 
@@ -77,10 +91,12 @@ def EjemGrillaAnidada(request):
     
 from aplicacionConex.forms import FormSeleccionBase  
 
-def SelectWidgetHerencia(request):
+def SelectWidgetRadioButton(request):
     formularioSelect = FormSeleccionBase(request.GET)
     #Para obtener los valores de la selección, aplicamos el método atributo value() a su campo selección:
-    valores_formulario = formularioSelect['seleccion'].value()
+    valores_formulario = formularioSelect['seleccion'].value() #seleccion es el único atributo de la clase FormSeleccionBase, instanciada y apuntada con el identificador formularioSelect.
+    print("type(valores_formulario):", type(valores_formulario)) #Vemos que retorna un <class 'str'>. 
+    
     #Nota: Recuerde que para poder tomar los valores de la selección, se debe configurar el formulario en la plantilla, dotándolo de un elemento input (en nuestro caso <input type="submit" value="selección"> dentro de una elemento form <form action="" method="GET">), que es el que enviará la solicitud (request).
     contexto = {'formularioEnPlantilla' : formularioSelect, 'valSelecEnPlanti': valores_formulario,} 
     contexto.update(Formulario(request)) #Si agrego el formulario cosulta de ticket, no me aparece el selec con radiobutton. Averiguar esto. Resp: era porque el nombre concordaba con el de la plantilla base (formularioEnPlantilla). Procedí a cambiar el nombre de formulario en plantilla base por formularioEnPlantillaBase, para que no se confundieran las dos variables de contexto en la misma plantilla html dónde actuan.

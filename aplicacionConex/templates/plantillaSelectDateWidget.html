@@ -3,14 +3,20 @@
 
 {% block content %}
 
-<h3>Ejemplo de Select Date Widget</h3>
+<h3>Ejemplo de Select Date Widget y Multiple Choice, dos widgets en un sólo form</h3>
 <!-- Aquí vemos como se pueden anidar las grillas de bootstraps. Haremos una matriz e 4 filas y dos columnas (4x2). -->
 <div class="row"> 
   <div class="col-6">
-      <p>{{ formularioEnPlantilla }}</p>	
+    <form action="" method="GET" style="font-size: x-small; align-items: center">
+      <table>
+      {{ formularioEnPlantilla }}
+      </table>
+      <input type="submit" value="mandar valores">
+    </form> <!--Recuerde que la entrada debe estar necesariamente dentro de un elemento form.--> 	
   </div>
   <div class="col-6">
-     <p>Columna2Fila1-6</p> 
+     <p>Valor de select date widget: {{ atrib_birth_year_EnPlantilla }}</p> 
+     <p>Valor de Multiple Choice widget: {{ atrib_favorite_colors_EnPlantilla }}</p>
   </div>
 </div>  <!--Cierre del row (primera fila).--> 
      
