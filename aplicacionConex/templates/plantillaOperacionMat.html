@@ -1,0 +1,22 @@
+
+{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+
+{% block content %}
+
+<h3>Operador Aritmético</h3>
+
+<div class="row"> 
+ <div class="col">
+  <form action="" method="GET" style="font-size: x-small; align-items: center">
+    <table>
+      {{ formularioEnPlantilla }}
+    </table>
+    <input type="submit" value="Ejecutar Operación">	
+  </form>
+ </div>
+ <div class="col">
+      Resultado: {{ resultadoEnPlantilla }}
+ </div>
+</div>   
+     
+{% endblock %}

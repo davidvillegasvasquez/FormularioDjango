@@ -119,3 +119,37 @@ def FormComboBox(request):
     #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket.
     return render(request, "plantillaSelectCombobox.html", contexto)
     
+    
+from aplicacionConex.forms import OperacionesMatematicas
+
+def Operacion(request):
+    
+    formOperacMat = OperacionesMatematicas(request.GET)#, initial=[{'operacion': '+', 'txtBox1': 0, 'txtBox2': 0,}])
+    
+    operacionSelec = formOperacMat['operacion'].value()
+    numeroTxtBox1 = formOperacMat['txtBox1'].value()
+    #Imprimimos en la terminal a ver que valor arroja ormOperacMat['txtBox1'].value():
+    print("formOperacMat['txtBox1'].value()=", numeroTxtBox1)
+    numeroTxtBox2 = formOperacMat['txtBox2'].value()
+    
+    #Validación rudimentario por no saber usar bien el framework:
+    resultado = 0
+    if operacionSelec is not None: #Los tipo forms.ChoiceField retornan None si no se coloca nada en el widget de dicho forms.
+    
+        if numeroTxtBox1 != '': #Comienza con cadena de longitud 0, no None type, puesto que los forms.CharField retorna dicha cadena vacía si no se coloca nada en el widget que se le asigne a dicho tipo de forms.
+            if numeroTxtBox2 != '': 
+                resultado = int(numeroTxtBox1) + int(numeroTxtBox2)
+            else: 
+                resultado = '0'
+        else: 
+            resultado = '0'
+    else: 
+        resultado = '0'
+    
+    #resultado = int(numeroTxtBox1) + int(numeroTxtBox2)
+    
+    #Procedemos a renderizar:
+    contexto = {'formularioEnPlantilla' : formOperacMat, 'resultadoEnPlantilla': resultado,} 
+    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket.
+    return render(request, "plantillaOperacionMat.html", contexto)
+    

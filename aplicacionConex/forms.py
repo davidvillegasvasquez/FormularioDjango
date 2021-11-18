@@ -33,9 +33,17 @@ class FormSeleccionBase(forms.Form):
 class FormSelectCombo(forms.Form):
     #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
     textos = [('1', 'texto1'), ('2', 'texto2'), ('3', 'texto3')]
-    numeros = [('1', 1), ('2', 2), ('3', 3)]
+    numeros = [(1, '1'), (2, '2'), (3, '3')]
     
     texto = forms.ChoiceField(choices=textos, required=False)
     numero = forms.ChoiceField(choices = numeros, required=False)  
 
+class OperacionesMatematicas(forms.Form):
+    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
+    operaciones = [('+', 'suma'), ('-', 'resta'), ('*', 'multiplicación'), ('/', 'multiplicación')]
+    
+    operacion = forms.ChoiceField(choices=operaciones, required=False)
+    
+    txtBox1 = forms.CharField(required=False, max_length=10, widget=forms.NumberInput(attrs={'size': '6'}))
+    txtBox2 = forms.CharField(required=False, max_length=10, widget=forms.NumberInput(attrs={'size': '6'}))
     
