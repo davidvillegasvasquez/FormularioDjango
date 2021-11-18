@@ -26,12 +26,16 @@ class SimpleForm(forms.Form):
         choices=FAVORITE_COLORS_CHOICES, required=False)  
         
 class FormSeleccionBase(forms.Form):
+    #Lo usamos para el ejemplo del widget tipo RasioSelect
     CHOICES = [('1', 'First'), ('10000', 'Second')]
     seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False) 
     
-class FormAplicEstilos(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'special'}), required=False)
-    url = forms.URLField(required=False)
-    comment = forms.CharField(widget=forms.TextInput(attrs={'size': '40'}), required=False)  
+class FormSelectCombo(forms.Form):
+    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
+    textos = [('1', 'texto1'), ('2', 'texto2'), ('3', 'texto3')]
+    numeros = [('1', 1), ('2', 2), ('3', 3)]
+    
+    texto = forms.ChoiceField(choices=textos, required=False)
+    numero = forms.ChoiceField(choices = numeros, required=False)  
 
     

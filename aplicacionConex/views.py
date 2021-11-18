@@ -34,7 +34,7 @@ def EjemSelectDateWidget(request):
     contexSelectDateWidget = {'formularioEnPlantilla' : SimpleForm(request.GET),}
     """
     
-    #Pero como necesitamos acceder a los valores de los campos atributos del objeto de clase SimpleForm, tenemos que usar necesariamente sun identificador:
+    #Pero como necesitamos acceder a los valores de todos los campos atributos del objeto de clase SimpleForm, tenemos que usar necesariamente un identificador apuntador, en este caso formularioSimpleForm:
     
     formularioSimpleForm = SimpleForm(request.GET)
     
@@ -42,12 +42,13 @@ def EjemSelectDateWidget(request):
     atrib_birth_year = formularioSimpleForm['birth_year'].value()
     atrib_favorite_colors = formularioSimpleForm['favorite_colors'].value()
     
-    #Preparamos el primer diccionario con las variables de contexto para la plantilla:
+    #Preparamos el diccionario principal con las variables de contexto para la plantilla:
     contexSelectDateWidget = {'formularioEnPlantilla' : formularioSimpleForm, 'atrib_birth_year_EnPlantilla' : atrib_birth_year, 'atrib_favorite_colors_EnPlantilla' : atrib_favorite_colors,}
     
-    #Concatenamos con el de formulario de consulta de tickets:
+    #Concatenamos con el diccionario que retorna el formulario de consulta de tickets:
     contexSelectDateWidget.update(Formulario(request))
     
+    #Finalmente renderizamos en la plantilla asociada a la vista, plantillaSelectDataWidget.html:
     return render(request, "plantillaSelectDateWidget.html", contexSelectDateWidget) 
     
     
@@ -99,17 +100,22 @@ def SelectWidgetRadioButton(request):
     
     #Nota: Recuerde que para poder tomar los valores de la selección, se debe configurar el formulario en la plantilla, dotándolo de un elemento input (en nuestro caso <input type="submit" value="selección"> dentro de una elemento form <form action="" method="GET">), que es el que enviará la solicitud (request).
     contexto = {'formularioEnPlantilla' : formularioSelect, 'valSelecEnPlanti': valores_formulario,} 
-    contexto.update(Formulario(request)) #Si agrego el formulario cosulta de ticket, no me aparece el selec con radiobutton. Averiguar esto. Resp: era porque el nombre concordaba con el de la plantilla base (formularioEnPlantilla). Procedí a cambiar el nombre de formulario en plantilla base por formularioEnPlantillaBase, para que no se confundieran las dos variables de contexto en la misma plantilla html dónde actuan.
+    contexto.update(Formulario(request)) #Si agrego el formulario cosulta de ticket, no me aparece el selec con radiobutton. Averiguar esto. Resp: era porque el nombre colicionaba con el de la plantilla base (formularioEnPlantilla). Procedí a cambiar el nombre de formulario en plantilla base por formularioEnPlantillaBase, para que no se confundieran las dos variables de contexto en la misma plantilla html dónde actúan.
     
-    return render(request, "plantillaSelectWidgetHeredado.html", contexto)
+    return render(request, "plantillaSelectRadioButton.html", contexto)
     
     
-from aplicacionConex.forms import FormAplicEstilos
+from aplicacionConex.forms import FormSelectCombo
 
-def AplicEstilos(request):
+def FormComboBox(request):
     
-    contexto = {'formularioEnPlantilla' : FormAplicEstilos(request.GET),}
-    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket (tampoco visitas).
+    #contexto = {'formularioEnPlantilla' : 'Una cadena de caracteres es lo que mando.',} Fijese como puedo mandar un literal como variable de contexto para la plantilla.
+    formulario = FormSelectCombo(request.GET)
+    valtextoSelec = formulario['texto'].value()
+    print('formulario[\'texto\'].value()=', valtextoSelec)
+    valnumSelec = formulario['numero'].value()
     
-    return render(request, "plantillaAplicandoEstilos.html", contexto)
+    contexto = {'formularioEnPlantilla' : formulario, 'valtextoSelecEnPlanti': valtextoSelec, 'valnumSelecEnPlanti': valnumSelec,} 
+    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket.
+    return render(request, "plantillaSelectCombobox.html", contexto)
     

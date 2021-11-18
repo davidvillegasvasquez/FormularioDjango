@@ -1,0 +1,25 @@
+
+{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+
+{% block content %}
+
+<h3>Widgets select list y combobox</h3>
+
+<div class="row"> 
+ <div class="col">
+  <form action="" method="GET" style="font-size: x-small; align-items: center">
+    
+      {{ formularioEnPlantilla }}
+    
+    <input type="submit" value="Ingresar">	
+  </form>
+ </div>
+ <div class="col">
+     <table>
+      Texto Seleccionado: {{ valtextoSelecEnPlanti }}
+      Número Seleccionado: {{ valnumSelecEnPlanti }}
+    </table>
+ </div>
+</div>   
+     
+{% endblock %}
