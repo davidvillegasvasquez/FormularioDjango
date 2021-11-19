@@ -131,22 +131,10 @@ def Operacion(request):
     #Imprimimos en la terminal a ver que valor arroja ormOperacMat['txtBox1'].value():
     print("formOperacMat['txtBox1'].value()=", numeroTxtBox1)
     numeroTxtBox2 = formOperacMat['txtBox2'].value()
-    
-    #Validación rudimentario por no saber usar bien el framework:
-    resultado = 0
-    if operacionSelec is not None: #Los tipo forms.ChoiceField retornan None si no se coloca nada en el widget de dicho forms.
-    
-        if numeroTxtBox1 != '': #Comienza con cadena de longitud 0, no None type, puesto que los forms.CharField retorna dicha cadena vacía si no se coloca nada en el widget que se le asigne a dicho tipo de forms.
-            if numeroTxtBox2 != '': 
-                resultado = int(numeroTxtBox1) + int(numeroTxtBox2)
-            else: 
-                resultado = '0'
-        else: 
-            resultado = '0'
-    else: 
-        resultado = '0'
-    
-    #resultado = int(numeroTxtBox1) + int(numeroTxtBox2)
+    #Validamos que el widget asociado al form tenga algún valor. Para este caso si no se coloca nada (cadena de longitud 0 ()'') o ningun valor (None), que es cuando se abre por la pág.
+    if numeroTxtBox1 is None or numeroTxtBox1 =='' : numeroTxtBox1 = 0
+    if numeroTxtBox2 is None or numeroTxtBox2 =='': numeroTxtBox2 = 0
+    resultado = float(numeroTxtBox1) + float(numeroTxtBox2)
     
     #Procedemos a renderizar:
     contexto = {'formularioEnPlantilla' : formOperacMat, 'resultadoEnPlantilla': resultado,} 

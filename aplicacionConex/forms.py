@@ -43,7 +43,9 @@ class OperacionesMatematicas(forms.Form):
     operaciones = [('+', 'suma'), ('-', 'resta'), ('*', 'multiplicación'), ('/', 'multiplicación')]
     
     operacion = forms.ChoiceField(choices=operaciones, required=False)
-    
-    txtBox1 = forms.CharField(required=False, max_length=10, widget=forms.NumberInput(attrs={'size': '6'}))
-    txtBox2 = forms.CharField(required=False, max_length=10, widget=forms.NumberInput(attrs={'size': '6'}))
+    #Con forms.ChoiceField y forms.DoubleField podemos ingresar numeros decimales.      
+    #widget=forms.NumberInput nos obliga (valida) a ingresar solamente números. 
+    #Note también como se establece el ancho del  widget txtBox, a diferencia del que use arriba para forms.TextField:
+    txtBox1 = forms.DecimalField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    txtBox2 = forms.DecimalField(required=False, decimal_places=2)
     

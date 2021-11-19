@@ -15,7 +15,7 @@
   </form>
  </div>
  <div class="col">
-      Resultado: {{ resultadoEnPlantilla }}
+      Resultado: {{ resultadoEnPlantilla|floatformat:2 }} <!--Con |floatformat:2 en la variable de contexto limitamos a 2 los decimales después de la coma. Conveniente para los racionales períodicos y no, e irracionales. -->
  </div>
 </div>   
      
