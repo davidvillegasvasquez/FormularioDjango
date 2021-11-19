@@ -31,7 +31,7 @@ class FormSeleccionBase(forms.Form):
     seleccion = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False) 
     
 class FormSelectCombo(forms.Form):
-    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
+    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas de dos elementos, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
     textos = [('1', 'texto1'), ('2', 'texto2'), ('3', 'texto3')]
     numeros = [(1, '1'), (2, '2'), (3, '3')]
     
@@ -39,13 +39,14 @@ class FormSelectCombo(forms.Form):
     numero = forms.ChoiceField(choices = numeros, required=False)  
 
 class OperacionesMatematicas(forms.Form):
-    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas, las cuales el Primer elemento es el módulo, y el segundo, su representación en el listbox.
-    operaciones = [('+', 'suma'), ('-', 'resta'), ('*', 'multiplicación'), ('/', 'multiplicación')]
+    #Recordar que las listas para el parámetro choices deben ser listas o tuplas de tuplas de dos elementos, las cuales el Primer elemento es el módulo, y el segundo, su representación que será el que se muestre en el listbox.
+    operaciones = [('+', 'suma'), ('-', 'resta'), ('*', 'multiplicación'), ('/', 'división')]
     
     operacion = forms.ChoiceField(choices=operaciones, required=False)
     #Con forms.ChoiceField y forms.DoubleField podemos ingresar numeros decimales.      
-    #widget=forms.NumberInput nos obliga (valida) a ingresar solamente números. 
+    #formularios de tipo forms.DecimalField o forms.DoubleField, nos obliga a meter sólo números, por lo cual no hace falta validar explicitamente por el usuario. 
     #Note también como se establece el ancho del  widget txtBox, a diferencia del que use arriba para forms.TextField:
-    txtBox1 = forms.DecimalField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
-    txtBox2 = forms.DecimalField(required=False, decimal_places=2)
+    txtBox1 = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    
+    txtBox2 = forms.FloatField(required=False)# decimal_places=2 (sólo aplicable en forms.DecimalField). Con el parámetro decimal_places, nos notifica el número de decimales que podemos meter, obligando a introducir la cantidad correcta, más no lo trunca, corrige automáticamente.
     

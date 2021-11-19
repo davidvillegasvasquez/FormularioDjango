@@ -15,7 +15,12 @@
   </form>
  </div>
  <div class="col">
-      Resultado: {{ resultadoEnPlantilla|floatformat:2 }} <!--Con |floatformat:2 en la variable de contexto limitamos a 2 los decimales después de la coma. Conveniente para los racionales períodicos y no, e irracionales. -->
+   {% if resultadoEnPlantilla == 'N/A' %}
+      Error, división entre cero!...introduzca un valor diferente a cero en txtBox2.
+   {% else %}
+      Resultado: {{ resultadoEnPlantilla|floatformat:2 }} <!--Con |floatformat:2 en la variable de contexto limitamos a 2 los decimales después de la coma. Conveniente para los números racionales períodicos y no, e irracionales. -->   
+   {% endif %}
+      
  </div>
 </div>   
      

@@ -131,10 +131,20 @@ def Operacion(request):
     #Imprimimos en la terminal a ver que valor arroja ormOperacMat['txtBox1'].value():
     print("formOperacMat['txtBox1'].value()=", numeroTxtBox1)
     numeroTxtBox2 = formOperacMat['txtBox2'].value()
-    #Validamos que el widget asociado al form tenga algún valor. Para este caso si no se coloca nada (cadena de longitud 0 ()'') o ningun valor (None), que es cuando se abre por la pág.
+    #Validamos que el widget asociado al form tenga algún valor. Para este caso si no se coloca nada -cadena de longitud 0 ('')- o ningún valor (None), que es cuando se abre por la pág.
+    if operacionSelec is None: operacionSelec = '+'
     if numeroTxtBox1 is None or numeroTxtBox1 =='' : numeroTxtBox1 = 0
     if numeroTxtBox2 is None or numeroTxtBox2 =='': numeroTxtBox2 = 0
-    resultado = float(numeroTxtBox1) + float(numeroTxtBox2)
+    
+    #Procedemos a obtener el resultado de la operación aritmética de acuerdo a la operación seleccionada (operacionSelec). Fíjese lo rudimentario a falta de selec-case en python, pero no es mal de morirse:
+    if operacionSelec == '+': resultado = float(numeroTxtBox1) + float(numeroTxtBox2)
+    if operacionSelec == '-': resultado = float(numeroTxtBox1) - float(numeroTxtBox2)
+    if operacionSelec == '*': resultado = float(numeroTxtBox1) * float(numeroTxtBox2)
+    if operacionSelec == '/':
+        if numeroTxtBox2 == '0':
+            resultado = 'N/A'
+        else:
+            resultado = float(numeroTxtBox1) / float(numeroTxtBox2)      
     
     #Procedemos a renderizar:
     contexto = {'formularioEnPlantilla' : formOperacMat, 'resultadoEnPlantilla': resultado,} 
