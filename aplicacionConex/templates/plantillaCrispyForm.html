@@ -1,0 +1,22 @@
+
+{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+
+{% block content %}
+
+<h3>Uso de Crispy en cálculo de envío.</h3>
+
+<div class="row"> 
+ <div class="col">
+  <form action="" method="GET" style="font-size: x-small; align-items: center">
+    <table>
+      {{ formularioEnPlantilla }}
+    </table>
+    <input type="submit" value="Calcular Costo">	
+  </form>
+ </div>
+ <div class="col">
+      Costo del Envío: {{ costoEnvioEnPlantilla|floatformat:2 }} Bs <!--Con |floatformat:2 en la variable de contexto limitamos a 2 los decimales después de la coma. Conveniente para los números racionales períodicos y no, e irracionales. -->        
+ </div>
+</div>   
+     
+{% endblock %}

@@ -148,6 +148,52 @@ def Operacion(request):
     
     #Procedemos a renderizar:
     contexto = {'formularioEnPlantilla' : formOperacMat, 'resultadoEnPlantilla': resultado,} 
-    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consuta de ticket.
+    #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consulta de ticket.
     return render(request, "plantillaOperacionMat.html", contexto)
+    
+from aplicacionConex.forms import CostoEnvio
+   
+def UsandoCrispy(request):
+    #Con esta vista hacemos el formulario de recolección de datos del envio:
+    formulario = CostoEnvio(request.GET)
+   
+    #Extraemos los valores de los textbox:
+    val_largo = formulario['largo'].value()
+    val_ancho = formulario['ancho'].value()
+    val_alto = formulario['alto'].value()
+    val_peso = formulario['peso'].value()
+    
+    #Seguimos validando manualmente porque no hemos estudiado el framework a fondo. Aquí en la vista, o el formulario debemos establecer los límites de las medidas. Averiguar:
+    if val_largo is None or val_largo =='' : val_largo = 0
+    if val_ancho is None or val_ancho =='': val_ancho = 0
+    if val_alto is None or val_alto =='': val_alto = 0
+    if val_peso is None or val_peso =='': val_peso = 0
+    
+    #Calculamos el costo del envío con la función Costo. Recuerde que los parámetros deben ser enviados en la magnitud pertinente (ya convertidos con el cast):
+    costoEnvio = Costo(float(val_largo), float(val_ancho), float(val_alto), float(val_peso)) 
+    
+    contexto = {'formularioEnPlantilla' : formulario, 'costoEnvioEnPlantilla': costoEnvio,} 
+    contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consulta de ticket.
+    return render(request, "plantillaCrispyForm.html", contexto)
+    
+#Función que calcula el precio del envío. Como se puede apreciar, no es una vista:  
+def Costo(largo, ancho, alto, peso):
+
+    dolarHoy = 4.3 #4.3 Bs/$. Aquí se debe hacer scraping a las páginas y promediar"
+    precioKilo = 6.76 * dolarHoy #6.76 dólares el kg, expresados en Bs/kg.
+    precioCentCub =0.005 * dolarHoy #0.005 dólares el cc, expresados en Bs/cc.
+    volumen = largo * ancho * alto
+    
+    #Validamos volumen, que no sea cero, situación que sucede al abrir la pág:
+    if volumen == 0:
+        densidad = 0
+    else:
+    	densidad = peso / volumen
+    
+    if densidad < .001: #Si la densidad es menor a la del agua, expresada en kg/cc, se calcula en base del volumen, de lo contrario en base al peso.
+        costo = volumen * precioCentCub
+    else:
+    	costo = peso * precioKilo
+    
+    return costo
     

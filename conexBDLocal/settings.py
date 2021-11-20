@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 'aplicacionConex.apps.AplicacionconexConfig',
+    'django.contrib.staticfiles', 'aplicacionConex.apps.AplicacionconexConfig', 'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +118,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Como vamos a usar el marco crispy basados en bootstrap para dar mejor apariencia, declaramos la variable de configuración django para su uso el proyecto:
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+

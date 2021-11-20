@@ -50,3 +50,15 @@ class OperacionesMatematicas(forms.Form):
     
     txtBox2 = forms.FloatField(required=False)# decimal_places=2 (sólo aplicable en forms.DecimalField). Con el parámetro decimal_places, nos notifica el número de decimales que podemos meter, obligando a introducir la cantidad correcta, más no lo trunca, corrige automáticamente.
     
+class CostoEnvio(forms.Form):
+    
+    largo = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    
+    ancho = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    
+    alto = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    
+    peso = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    
+    
+    
