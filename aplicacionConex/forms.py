@@ -50,7 +50,8 @@ class OperacionesMatematicas(forms.Form):
     
     txtBox2 = forms.FloatField(required=False)# decimal_places=2 (sólo aplicable en forms.DecimalField). Con el parámetro decimal_places, nos notifica el número de decimales que podemos meter, obligando a introducir la cantidad correcta, más no lo trunca, corrige automáticamente.
     
-class CostoEnvio(forms.Form):
+class FormCostoEnvio(forms.Form):
+    
     
     largo = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
     
@@ -60,5 +61,52 @@ class CostoEnvio(forms.Form):
     
     peso = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
     
+#Formulario para el tutoria de Crispy Forms:
+from crispy_forms.helper import FormHelper 
+from crispy_forms.layout import Submit
+ 
+class ExampleForm(forms.Form):
+
+    like_website = forms.TypedChoiceField(
+        label = "Do you like this website?",
+        choices = ((1, "Yes"), (0, "No")),
+        coerce = lambda x: bool(int(x)),
+        widget = forms.RadioSelect,
+        initial = '1',
+        required = True,
+    )
+
+    favorite_food = forms.CharField(
+        label = "What is your favorite food?",
+        max_length = 80,
+        required = True,
+    )
+
+    favorite_color = forms.CharField(
+        label = "What is your favorite color?",
+        max_length = 80,
+        required = True,
+    )
+
+    favorite_number = forms.IntegerField(
+        label = "Favorite number",
+        required = False,
+    )
+
+    notes = forms.CharField(
+        label = "Additional notes or feedback",
+        required = False,
+    )
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
     
     

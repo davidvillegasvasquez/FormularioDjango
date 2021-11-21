@@ -1,17 +1,21 @@
 
-{% extends "base_generica.html" %}<!--Esta es una etiqueta de extensión para django: esta plantilla es hija o heredera de base_generica.html -->
+{% extends "base_generica.html" %}
 
 {% block content %}
 
-<h3>Uso de Crispy en cálculo de envío.</h3>
+{% load crispy_forms_tags %}<!--Y así cargamos crispy -->
+
+<h3>Cálculo de envío. Usamos crispy para los txtBoxs.</h3>
 
 <div class="row"> 
  <div class="col">
   <form action="" method="GET" style="font-size: x-small; align-items: center">
     <table>
-      {{ formularioEnPlantilla }}
+      {{ formularioEnPlantilla|crispy }}<!--Aplicamos un filtro crispy, para que todos los widgets de este formulario tengan la apariencia crispy bootstrap. -->
     </table>
-    <input type="submit" value="Calcular Costo">	
+    
+    <input type="submit" value="Calcular Costo">
+    	
   </form>
  </div>
  <div class="col">

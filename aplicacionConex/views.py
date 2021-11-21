@@ -151,11 +151,11 @@ def Operacion(request):
     #contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consulta de ticket.
     return render(request, "plantillaOperacionMat.html", contexto)
     
-from aplicacionConex.forms import CostoEnvio
+from aplicacionConex.forms import FormCostoEnvio
    
-def UsandoCrispy(request):
+def CostoEnvio(request):
     #Con esta vista hacemos el formulario de recolección de datos del envio:
-    formulario = CostoEnvio(request.GET)
+    formulario = FormCostoEnvio(request.GET)
    
     #Extraemos los valores de los textbox:
     val_largo = formulario['largo'].value()
@@ -174,7 +174,7 @@ def UsandoCrispy(request):
     
     contexto = {'formularioEnPlantilla' : formulario, 'costoEnvioEnPlantilla': costoEnvio,} 
     contexto.update(Formulario(request)) #Claro, si no concateno con el diccionario que retorna Formulario(request), no tendré el formulario de consulta de ticket.
-    return render(request, "plantillaCrispyForm.html", contexto)
+    return render(request, "plantillaCostoEnvio.html", contexto)
     
 #Función que calcula el precio del envío. Como se puede apreciar, no es una vista:  
 def Costo(largo, ancho, alto, peso):
@@ -197,3 +197,21 @@ def Costo(largo, ancho, alto, peso):
     
     return costo
     
+"""    
+def CrispyForms(request):
+     
+    return render(request, "plantillaCrispy.html", {}) #Podemos hacer esto, pero no tiene sentido: vamos directamente a la vista inbox, que renderiza el formulario en la plantilla plantillaCrispy.html.
+"""
+    
+from aplicacionConex.forms import ExampleForm
+def inbox(request):
+    example_form = ExampleForm()
+    redirect_url = request.GET.get('next')
+
+    # Form handling logic
+    #[...]
+
+    if redirect_url is not None:
+        example_form.helper.form_action = reverse('submit_survey') + '?next=' + redirectUrl
+
+    return render(request, "plantillaCrispy.html", {'example_form': example_form},)

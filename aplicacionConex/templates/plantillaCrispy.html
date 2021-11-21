@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  
+  <title>CrispyForms Ejercicios</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+</head>
+<STYLE>A {text-decoration: none;} </STYLE> <!-- Para quitar todos los subrayados a las anclas.-->
+<body>
+ <div class="container"><!---->
+  <div class="row" style="background-color:#2C3E50; color: white"><!-- Fila para la cabecera. Note como colocar los colores de fondo y texto.-->
+   <h3>Cabecera</h3>
+  </div>
+  
+  <div class="row" style="background-color:yellow"><!-- Fila para la subcabecera-->
+   <p><a href="{% url 'index' %}">Home</a>&nbsp&nbsp&nbsp&nbsp</p><!--Agregamos espacios &nbsp entre los menus (el punto y coma es prescindible).  -->
+  </div><!-- Cierre fila subcabecera-->
+  
+  <div class="row" > <!--Fila para el Contenido principal-->
+  
+     {% load crispy_forms_tags %}
+     {% crispy example_form example_form.helper %}<!--example_form será el nombre de formulario de la variable de contexto del renderizador de su vista.-->
+  </div>
+  
+ <div class="row" style="background-color:#2C3E50; color:red"> <!--Fila para el Pie de página-->
+   <h3>Pie de Página</h3>
+ </div>
+ 
+ </div><!--Cierre de la clase container.-->
+</body>
+</html>
