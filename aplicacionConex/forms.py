@@ -46,9 +46,9 @@ class OperacionesMatematicas(forms.Form):
     #Con forms.ChoiceField y forms.DoubleField podemos ingresar numeros decimales.      
     #formularios de tipo forms.DecimalField o forms.DoubleField, nos obliga a meter sólo números, por lo cual no hace falta validar explicitamente por el usuario. 
     #Note también como se establece el ancho del  widget txtBox, a diferencia del que use arriba para forms.TextField:
-    txtBox1 = forms.FloatField(required=False, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
+    txtBox1 = forms.FloatField(required=False)#, widget=forms.NumberInput(attrs={'style': 'width: 100px'}))
     
-    txtBox2 = forms.FloatField(required=False)# decimal_places=2 (sólo aplicable en forms.DecimalField). Con el parámetro decimal_places, nos notifica el número de decimales que podemos meter, obligando a introducir la cantidad correcta, más no lo trunca, corrige automáticamente.
+    txtBox2 = forms.FloatField()# decimal_places=2 (sólo aplicable en forms.DecimalField). Con el parámetro decimal_places, nos notifica el número de decimales que podemos meter, obligando a introducir la cantidad correcta, más no lo trunca, corrige automáticamente.
     
 class FormCostoEnvio(forms.Form):
     

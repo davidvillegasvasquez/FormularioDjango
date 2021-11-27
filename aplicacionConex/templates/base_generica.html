@@ -6,9 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+  <link rel="stylesheet" href="{% static 'js/js.css' %}">
 </head>
 <STYLE>A {text-decoration: none;} </STYLE> <!-- Para quitar todos los subrayados a las anclas.-->
+
 <body>
  <div class="container"><!--Todos los elementos de esta pag estarán en todas las paginas del sitio web, excepto la que están en la columna principal debajo de la subcapecera, en "block content-endblock" que están encerrados entre llaves y signos %. Tengo que describirlo así, porque si lo cito literamente, no respeta ni que esté dentro de este comentario y me produce el error: 'block' tag with name 'content' appears more than once-->
   <div class="row" style="background-color:#2C3E50; color: white"><!-- Fila para la cabecera. Note como colocar los colores de fondo y texto.-->
@@ -28,9 +31,10 @@
         
         <form action="" method="GET" style="font-size: x-small; align-items: center">
            <!-- {% csrf_token %} Con esta encriptación hago invisible datos sensibles. Aquí no hace falta.-->
-         <!--<table>-->
+         <table>
+          
     	   {{ formularioEnPlantillaBase }}
-        <!-- </table>-->
+        </table>
         <br><br>
         <input type="submit" value="Buscar"><!-- El input no puede estar fuera del ámbito <form></form>-->
         </form>

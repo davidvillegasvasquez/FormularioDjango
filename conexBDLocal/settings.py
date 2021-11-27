@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 'aplicacionConex.apps.AplicacionconexConfig', 'crispy_forms',
-]
+] #Definimos crispy_forms para customizar nuestros formularios.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,5 +122,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Como vamos a usar el marco crispy basados en bootstrap para dar mejor apariencia, declaramos la variable de configuración django para su uso el proyecto:
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Cuando crispy forms encuentra errores, falla silenciosamente, los registra y continúa funcionando si es posible. Se ha agregado una variable de configuración de llamada para que pueda controlar este comportamiento. 
+#Si desea generar excepciones en lugar de iniciar sesión, y decirle qué sucede cuando está desarrollando en modo de depuración, puede configurarlo en:
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 

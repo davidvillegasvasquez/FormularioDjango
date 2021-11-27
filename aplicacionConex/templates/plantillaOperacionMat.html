@@ -7,12 +7,26 @@
 
 <div class="row"> 
  <div class="col">
-  <form action="" method="GET" style="font-size: x-small; align-items: center">
-    <table>
+ 
+  <form action="" method="GET">
+   <!-- <table>
       {{ formularioEnPlantilla }}
-    </table>
-    <input type="submit" value="Ejecutar Operación">	
+   </table>-->
+      <!-- Usando w3.css. Tenemos que usar cada uno de los campos del formulario:-->
+      
+      <label>Seleccione Operación:</label>
+      <select class="w3-select w3-cursive w3-xxlarge" value=""{{ formularioEnPlantilla.operacion }}>
+      <label>Primer Número</label>
+      <input class="w3-input w3-border" {{formularioEnPlantilla.txtBox1}}>
+      <label>Segundo Número</label>
+      <input class="w3-input w3-border" {{formularioEnPlantilla.txtBox2}}> 
+      
+      <button class="w3-button w3-block w3-dark-grey w3-round-xlarge " type="submit" style="width:38%">
+       Ejecutar
+    </button>
+    	
   </form>
+  
  </div>
  <div class="col">
    {% if resultadoEnPlantilla == 'N/A' %}

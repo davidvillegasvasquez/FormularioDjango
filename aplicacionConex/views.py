@@ -16,7 +16,7 @@ def index(request):
     
     context = {'cantVisitas': acum_visitas,}
     context.update(Formulario(request))
-     
+    
     return render(request, "index.html", context)
     
   
